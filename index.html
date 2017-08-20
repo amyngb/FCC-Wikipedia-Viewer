@@ -5,25 +5,66 @@
     <title>Wikipedia Viewer</title>
     <link rel="stylesheet" href="app.css"></link>
     <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.css"></link>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/linux-libertine" type="text/css"/>
+
   </head>
+
   <body>
+<div class="backgroundImage">
 
 
-<button type="button" name="button" class='btn-danger'>Danger</button>
+<!-- Title -->
+<div class="row text-center">
+  <div class="col-sm-2 col-md-3 col-lg-4"></div>
+  <div class="col-sm-8 col-md-6 col-lg-4">
+    <h1 class='font'>Wikipedia Viewer</h1>
+  </div>
+  <div class="col-sm-2 col-md-3 col-lg-4"></div>
+
+</div>
+
+<!-- Random Article and button-->
+<div class="row text-center">
+  <div class="col-sm-2 col-md-3 col-lg-4"></div>
+  <div class="col-sm-8 col-md-6 col-lg-4">
+    <h5 class='random' > <a class='link-unstyled' href='https://en.wikipedia.org/wiki/Special:Random' target='_blank'>Read </a>a random article...</h5>
+  </div>
+  <div class="col-sm-2 col-md-3 col-lg-4"></div>
+</div>
+
+<!-- Search Box and button -->
+<div class="row text-center">
+  <div class="col-sm-12">
+    <input type="text" class='searchbox' placeholder="...or search here" />
+    <button type="button" >Go</button>
+  </div>
+</div>
+
+
+<!-- Display Search Results. Repeat, etc.-->
+
+<div class="row article-generator">
+  <div class="col-sm-2 col-md-3"></div>
+  <div class="col-sm-8 col-md-6 article">
+    <h3 class='article-headline'>Lorem Ipsum</h3>
+    <p class='article-content'>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+  </div>
+  <div class="col-sm-2 col-md-3"></div>
+</div>
 
 
 
+<!-- Footer -->
+<div class="row text-center">
+  <footer>
+    Coded by <a class='link-unstyled' href='https://github.com/amyngb' target = "_blank"> Amy Bedinghaus </a>
+  </footer>
+</div>
 
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script type="text/javascript" src = "wikipedia.js"></script>
 
-
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script type="text/javascript" src = "wikipedia.js">
-
-    </script>
   </body>
 </html>
