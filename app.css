@@ -1,37 +1,87 @@
+/*Media queries*/
+/* Custom, iPhone Retina */
+    @media only screen and (min-width : 320px) {
+
+    }
+
+    /* Extra Small Devices, Phones */
+    @media only screen and (min-width : 480px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+      .books1, .books2 {
+        background-size: cover;
+      }
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+
+
+}
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+      .books1, .books2 {
+        background-size: contain;
+      }
+    }
+
+    /*General styling*/
 html, body {
   height: 100%;
   background-color: grey;
 }
 
-.backgroundImage {
+.main {
   background-color: grey;
   height: 100%;
   position: relative;
-  /*background-image: url( 'http://68.media.tumblr.com/a4e8abfbb1a0be769bc06aa2a61eeff7/tumblr_nsoart1B4L1qfirfao1_1280.jpg');
-  background-repeat: no-repeat;
-  background-position: top;*/
+  padding-bottom: 3em;
 }
 
+ /*Sidebar styling*/
 
-.font {
+.books2 {
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/27/9f/92/279f92ec8bea6e4773ca9a5b425b331e.jpg');
+}
+
+.books1 {
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/27/9f/92/279f92ec8bea6e4773ca9a5b425b331e.jpg');
+  /*Reverse image*/
+  -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+
+
+}
+
+/*Title styling*/
+.title {
   padding: 1em;
   font-family: 'Linux Libertine', serif;
-  color: #EAECEE;
+  /*color: #EAECEE;*/
   font-weight: bold;
-  margin: 1em 0 1em 0;
+  margin-bottom: 1em;
   border-bottom: solid;
 }
 
+/*Random article and searchbox styling*/
 .random {
   font-family: 'Helvetica', sans-serif;
   color: black;
   background-color: #EAECEE;
-  margin-bottom: 20px;
+  margin-bottom: 1em;
 }
 
 .searchbox {
   font-family: 'Helvetica', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 1em;
 }
 
 button {
@@ -43,16 +93,15 @@ button:hover {
 
 }
 
-.article-headline {
-  font-family: 'Linux Libertine', serif;
-  font-weight: bold;
-  margin-bottom: 15px;
-  border-bottom: solid;
-}
+/*This should disappear with Javascript*/
+/*.spacing {
+  margin-bottom: 9em;
+  visibility: collapse;
+}*/
 
-.article-content {
-  font-family: 'Helvetica', sans-serif;
-  padding: 5px;
+/*Article Styling **Appears with Javascript*/
+.article-generator {
+  visibility: visible;
 }
 
 .article {
@@ -61,8 +110,18 @@ button:hover {
   margin: 5px;
 }
 
-.article-generator {
-  visibility: visible;
+.article-headline {
+  font-family: 'Linux Libertine', serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: solid;
+  text-align: left;
+}
+
+.article-content {
+  font-family: 'Helvetica', sans-serif;
+  padding: 5px;
+  text-align: left;
 }
 
 .article:hover {
@@ -71,8 +130,10 @@ button:hover {
   border-color:#1675e9;
 }
 
+/*Footer and link styling*/
+
 footer {
-    margin-top: 20px;
+    padding-bottom: 1em;
     position: absolute;
     bottom: 0;
     width: 100%;
