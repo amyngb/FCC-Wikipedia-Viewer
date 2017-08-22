@@ -71,6 +71,18 @@ html, body {
   border-bottom: solid;
 }
 
+/*Logo styling*/
+.logo {
+height: 7em;
+width: 7em;
+margin-bottom: 1em;
+}
+
+figcaption {
+  font-family: "Helvetica", sans-serif;
+  background-color: #EAECEE;
+}
+
 /*Random article and searchbox styling*/
 .random {
   font-family: 'Helvetica', sans-serif;
