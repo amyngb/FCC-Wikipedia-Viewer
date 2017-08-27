@@ -6,6 +6,10 @@ var dataArr = [];
 // ************ Data Storage **************
 
 function reorderArticles (result) {
+//clear old data
+  if (dataArr !==[]) {
+    dataArr = [];
+  }
   jQuery.each(result.query.pages, function() {
     dataArr.push([$(this)]);
   })
@@ -19,13 +23,9 @@ function reorderArticles (result) {
     return 0;
   })
   generateArticles(dataArr);
-  console.log(dataArr);
-  console.log(dataArr[0][0][0].title);
+
 }
 
-function clearArticlesData() {
-  
-}
 
 
 $(document).ready(function () {
@@ -46,7 +46,7 @@ $(document).ready(function () {
       var keyword = $('#keyword').val();
       if (keyword) {
       clearArticles();
-      clearArticlesData();
+
 
       $.ajax({
         type: "GET",
@@ -67,7 +67,7 @@ $(document).ready(function () {
   // ********Update UI*************
 
 function clearArticles() {
-  for (var i = 0; i <= dataArr.length; i++){
+  for (var i = 0; i <= dataArr.length + 1; i++){
     var clearMe = document.getElementById('article-generator');
     if(clearMe.hasChildNodes()) {
       clearMe.removeChild(clearMe.lastChild);
@@ -79,7 +79,6 @@ function clearArticles() {
 function generateArticles(dataArr){
   for (var i = 0; i<= dataArr.length; i++){
     var articleGen =  document.getElementById('article-generator');
-    console.log(articleGen);
     var headline = dataArr[i]['0']['0'].title;
     var content = dataArr[i]['0']['0'].extract;
     var wikiID = 'https://en.wikipedia.org/?curid=';
