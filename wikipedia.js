@@ -1,3 +1,43 @@
+
+
+
+
+$(document).ready(function () {
+  //Get user input
+  getInput();
+  //Add blank space to page, initially
+  addSpacing();
+  //Access wiki api
+  function getInput() {
+    //Keyword search on click
+    $('#searchButton').on('click', function(){
+      callback();
+      })
+    //on keypress of enter
+    $("input").keypress(function() {
+      if (event.which == 13) {
+        callback();
+      }
+    });
+    //do this on keypress or click
+      function callback() {
+      var keyword = $('#keyword').val();
+      if (keyword) {
+      clearArticles();
+
+      $.ajax({
+        type: "GET",
+        url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=' + keyword + '&gsrlimit=10',
+        dataType: 'jsonp',
+        success: function(response){
+          reorderArticles(response);
+        }
+      })
+      }
+    }
+}
+})
+
 // *********Get data**************
 var wApiHost = 'https://en.wikipedia.org/w/api.php';
 var searchParam = '?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=butterfly&gsrlimit=10';
@@ -26,45 +66,11 @@ function reorderArticles (result) {
 
 }
 
-
-
-$(document).ready(function () {
-  //Get user input
-  getInput();
-  //Access wiki api
-  function getInput() {
-    //on click
-    $('#searchButton').on('click', function(){
-      callback();
-      })
-    //on keypress of enter
-    $("input").keypress(function() {
-      if (event.which == 13) callback();
-    });
-    //do this on keypress or click
-      function callback() {
-      var keyword = $('#keyword').val();
-      if (keyword) {
-      clearArticles();
-
-
-      $.ajax({
-        type: "GET",
-        url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=' + keyword + '&gsrlimit=10',
-        dataType: 'jsonp',
-        success: function(response){
-          reorderArticles(response);
-        }
-      })
-      }
-    }
-}
-})
-
-  //Keyword search
-
-
   // ********Update UI*************
+
+  function addSpacing(){
+    document.getElementById('aftersearchbox').insertAdjacentHTML('afterend', '<div id="spacing"></div>');
+  }
 
 function clearArticles() {
   for (var i = 0; i <= dataArr.length + 1; i++){
@@ -77,6 +83,12 @@ function clearArticles() {
 }
 
 function generateArticles(dataArr){
+  //remove empty page spacing if it's there
+  var spacing = document.getElementById('spacing');
+  if (spacing) {
+    spacing.parentNode.removeChild(spacing);
+  }
+//create list of articles
   for (var i = 0; i<= dataArr.length; i++){
     var articleGen =  document.getElementById('article-generator');
     var headline = dataArr[i]['0']['0'].title;
@@ -84,10 +96,6 @@ function generateArticles(dataArr){
     var wikiID = 'https://en.wikipedia.org/?curid=';
     var link = wikiID + dataArr[i]['0']['0'].pageid;
 
-    //use hasOwnProperty
-
     articleGen.insertAdjacentHTML('afterbegin', '<div class="col-10 col-md-8 article"><a  class= "link-unstyled-article" target = "_blank" href=' + link + '><h4 class="article-headline">' + headline + '</h4> <p class="article-content">"' + content + '"</p> </a></div>')
-
   }
-
 }

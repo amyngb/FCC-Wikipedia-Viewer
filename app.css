@@ -106,15 +106,11 @@ button:hover {
 }
 
 /*This should disappear with Javascript*/
-/*.spacing {
-  margin-bottom: 9em;
-  visibility: collapse;
-}*/
+#spacing {
+  margin-bottom: 20em;
+}
 
 /*Article Styling **Appears with Javascript*/
-/*.article-generator {
-  visibility: hidden;
-}*/
 
 .article {
   /*background-image: url('http://www.photos-public-domain.com/wp-content/uploads/2012/05/ivory-off-white-paper-texture.jpg');*/
