@@ -31,7 +31,7 @@ $(document).ready(function () {
         clearArticles();
         $.ajax({
           type: "GET",
-          url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=' + keyword + '&gsrlimit=10',
+          url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=2&exintro=1&explaintext=1&gsrsearch=' + keyword + '&gsrlimit=10',
           dataType: 'jsonp',
           success: function(response){
             reorderArticles(response);
