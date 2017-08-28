@@ -1,7 +1,3 @@
-
-
-
-
 $(document).ready(function () {
   //Get user input
   getInput();
@@ -11,48 +7,54 @@ $(document).ready(function () {
   function getInput() {
     //Keyword search on click
     $('#searchButton').on('click', function(){
-      callback();
-      })
+      apiCall();
+    });
     //on keypress of enter
-    $("input").keypress(function() {
+    $("input").keydown(function() {
       if (event.which == 13) {
-        callback();
+        $('#searchButton').css('background-color', '#1675e9');
+        apiCall();
+      }
+    });
+
+    $("input").keyup(function() {
+      if (event.which == 13) {
+        $('#searchButton').css('background-color', '#EAECEE')
       }
     });
     //do this on keypress or click
-      function callback() {
+    function apiCall() {
+    //use the user keyword to search api
       var keyword = $('#keyword').val();
+    //clear out old articles
       if (keyword) {
-      clearArticles();
-
-      $.ajax({
-        type: "GET",
-        url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=' + keyword + '&gsrlimit=10',
-        dataType: 'jsonp',
-        success: function(response){
-          reorderArticles(response);
+        clearArticles();
+        $.ajax({
+          type: "GET",
+          url: 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=' + keyword + '&gsrlimit=10',
+          dataType: 'jsonp',
+          success: function(response){
+            reorderArticles(response);
+            }
+          })
         }
-      })
       }
     }
-}
-})
+  })
 
-// *********Get data**************
-var wApiHost = 'https://en.wikipedia.org/w/api.php';
-var searchParam = '?action=query&format=json&prop=extracts&iwurl=1&generator=search&exsentences=4&exintro=1&explaintext=1&gsrsearch=butterfly&gsrlimit=10';
-var wikiID = 'https://en.wikipedia.org/?curid=';
-var dataArr = [];
+
 // ************ Data Storage **************
-
+var dataArr = [];
 function reorderArticles (result) {
-//clear old data
+  //clear old data
   if (dataArr !==[]) {
     dataArr = [];
   }
+  //push objects from JSON into array
   jQuery.each(result.query.pages, function() {
     dataArr.push([$(this)]);
   })
+  //order those objects by JSON index number
   dataArr.sort(function (a, b) {
     if (a[0][0].index > b[0][0].index) {
       return -1;
@@ -63,23 +65,22 @@ function reorderArticles (result) {
     return 0;
   })
   generateArticles(dataArr);
-
 }
 
   // ********Update UI*************
 
-  function addSpacing(){
+//add initial spacing to page
+function addSpacing(){
     document.getElementById('aftersearchbox').insertAdjacentHTML('afterend', '<div id="spacing"></div>');
-  }
-
+}
+//clear previous articles from UI
 function clearArticles() {
-  for (var i = 0; i <= dataArr.length + 1; i++){
+  for (var i = 0; i <= dataArr.length + 2; i++){
     var clearMe = document.getElementById('article-generator');
     if(clearMe.hasChildNodes()) {
       clearMe.removeChild(clearMe.lastChild);
     }
   }
-
 }
 
 function generateArticles(dataArr){
@@ -88,7 +89,7 @@ function generateArticles(dataArr){
   if (spacing) {
     spacing.parentNode.removeChild(spacing);
   }
-//create list of articles
+  //insert articles into UI
   for (var i = 0; i<= dataArr.length; i++){
     var articleGen =  document.getElementById('article-generator');
     var headline = dataArr[i]['0']['0'].title;
