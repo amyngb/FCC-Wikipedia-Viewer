@@ -20,8 +20,14 @@ $(document).ready(function () {
     $("input").keyup(function() {
       if (event.which == 13) {
         $('#searchButton').css('background-color', '#EAECEE')
-      }
+        $('#searchButton').mouseenter(function(){
+          $(this).css('background-color', '#1675e9');
+      });
+      $('#searchButton').mouseout(function(){
+        $(this).css('background-color', '#EAECEE');
     });
+    }
+  });
     //do this on keypress or click
     function apiCall() {
     //use the user keyword to search api
@@ -35,6 +41,7 @@ $(document).ready(function () {
           dataType: 'jsonp',
           success: function(response){
             reorderArticles(response);
+            console.log(response);
             }
           })
         }
@@ -92,8 +99,8 @@ function generateArticles(dataArr){
   //insert articles into UI
   for (var i = 0; i<= dataArr.length; i++){
     var articleGen =  document.getElementById('article-generator');
-    var headline = dataArr[i]['0']['0'].title;
-    var content = dataArr[i]['0']['0'].extract;
+    var headline = dataArr[i][0][0].title;
+    var content = dataArr[i][0][0].extract;
     var wikiID = 'https://en.wikipedia.org/?curid=';
     var link = wikiID + dataArr[i]['0']['0'].pageid;
 
