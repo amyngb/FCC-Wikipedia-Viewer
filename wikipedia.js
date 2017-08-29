@@ -97,7 +97,7 @@ function generateArticles(dataArr){
     spacing.parentNode.removeChild(spacing);
   }
   //insert articles into UI
-  for (var i = 0; i<= dataArr.length; i++){
+  for (var i = 0; i< dataArr.length; i++){
     var articleGen =  document.getElementById('article-generator');
     var headline = dataArr[i][0][0].title;
     var content = dataArr[i][0][0].extract;
